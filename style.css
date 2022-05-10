@@ -1,0 +1,387 @@
+/* ------------------------------------------------------------------- */
+/* Header navigation                                                   */
+/* ------------------------------------------------------------------- */
+
+// Color active nav item
+.header-nav-item--active > a {
+  color: #990000 !important;
+  background-image: none !important;
+}
+.header-nav-folder-item--active > a {
+  color: #990000 !important;
+}
+
+.header-nav-item > a {
+    font-weight: 500;
+}
+.header-nav .header-nav-item--folder .header-nav-folder-content .header-nav-folder-item {
+  text-indent: -1em;
+  margin-left: 1em;
+  line-height: 1.8em;
+}
+.header-nav .header-nav-item--folder .header-nav-folder-content {
+  padding-right: 2em;
+}
+.header-nav .header-nav-item--folder .header-nav-folder-content {
+  /*width: inherit;*/
+}
+body[data-menu-overlay-theme-switcher="true"]:not(.header--menu-open) 
+.header-nav-item--active a {
+  white-space: nowrap;
+}
+// align dropdown box and content
+.header .header-layout-nav-right .header-nav .header-nav-item--folder .header-nav-folder-content {
+    left: -1em;
+    text-align: left;
+}
+
+/* ------------------------------------------------------------------- */
+/* Generate Mailchimp code                                             */
+/* ------------------------------------------------------------------- */
+
+#MailChimp-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    border: 1px solid black;
+    padding: 10px;
+    font-family: Helvetica;
+    font-size: 16px;
+    display: none;
+}
+#controls-wrapper textarea {
+   width: 100%;
+   height: 100px;
+   display: none;
+}
+#controls-wrapper textarea.active {
+    display: block;
+}
+#controls-wrapper button {
+    background-color: #224ba2;
+    color: #fff;
+    padding: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+#controls-wrapper button#copyToClip {
+    display: none;
+}
+#controls-wrapper button.active {
+    display: block; 
+}
+
+/* ------------------------------------------------------------------- */
+/* Button color                                                        */
+/* ------------------------------------------------------------------- */
+
+.sqs-block-button-element, .image-button a, 
+  .header-actions .btn, .header-skip-link {
+   /*background-color: #006100;*/
+}
+
+/* ------------------------------------------------------------------- */
+/* Back to all events button link                                      */
+/* ------------------------------------------------------------------- */
+
+/* Remove <- Back to all Events link */
+.eventitem-backlink {
+  display: none;
+}
+
+
+/* ------------------------------------------------------------------- */
+/* Filter checkboxes for programs, events                              */
+/* ------------------------------------------------------------------- */
+
+/* Filter flexbox */
+#filterContainer .flexBox {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    flex-basis:auto;
+}
+
+#filterContainer .flexBox .filterGroup {
+    margin: 0 10px;
+    flex-basis: 200px;
+}
+#filterContainer .flexBox .filterGroup > span {
+    background: #EC2625;
+    color: white;
+    width: 100%;
+    display: block;
+    padding: 5px;
+    font-weight: bold;
+    margin-bottom: 5px;
+
+}
+
+#filterContainer .flexBox .filterGroup ul {
+   /* list-style-type: none; /* Remove bullets */
+    padding: 0; 
+    margin: 0; 
+    margin-bottom: 20px;
+    list-style: none;
+    margin-left: 0; 
+    padding-left: 1em;
+    text-indent: -2em;
+}
+
+#filterContainer .flexBox .filterGroup ul li {
+     padding-left: 1em;
+}
+#filterContainer {
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+#filterContainer .flexBox .filterGroup ul li span {
+    margin-left: 10px;
+}
+
+/* ------------------------------------------------------------------- */
+/* Prevent clicking on a category, highligh active category red        */
+/* ------------------------------------------------------------------- */
+
+div.summary-content div.summary-metadata-container 
+div.summary-metadata span.summary-metadata-item--cats a {
+    pointer-events: none;
+}
+
+div.summary-content div.summary-metadata-container 
+div.summary-metadata span.summary-metadata-item--cats a.active {
+    color:red;
+}
+
+/* ------------------------------------------------------------------- */
+/* Accordian                                                           */
+/* ------------------------------------------------------------------- */
+
+.markdown-accordian p {
+  margin-left: 0;
+}
+.markdown-accordian .ui-closed:before {
+  font-family:monospace;
+  content:"+ ";
+}
+
+.markdown-accordian .ui-open:before {
+  font-family:monospace;
+  content:"- ";
+}
+ 
+.markdown-accordian .sqs-block-content h4 {
+    border: 1px solid black;
+    padding: 5px;
+    background: #eee;
+    border-radius: 10px;
+}
+
+/* ------------------------------------------------------------------- */
+/* Gallery Slide Show                                                  */
+/* ------------------------------------------------------------------- */
+
+div.section-background-overlay {
+    z-index: 1;
+}
+div.section-background div.mySlides div.slideCaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: black;
+    padding: 5px 10px;
+    word-wrap: break-word;
+    color: white;
+    line-height: 1.4em;
+}
+div.section-background div.mySlides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+div.section-background div.mySlides {
+    position: absolute;
+    left: 0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0); 
+    height: 100%;
+    width: 100%  
+}
+div.section-background div.mySlides div.slideCaption a {
+        pointer-events: none;
+        cursor: none;
+        text-decoration: none;
+}
+div.section-background div.mySlides.opaque div.slideCaption a {
+    pointer-events: auto;
+    cursor: pointer;
+    text-decoration: underline;
+}
+div.section-background div.mySlides.opaque {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=1);
+}
+
+/*div.mySlides {
+  z-index: 1;
+}*/
+
+div.slideCaption {
+  z-index: 2;
+}
+
+/* ------- Read more link */
+.sqs-block-summary-v2 .summary-read-more-link {
+   display: block;
+  }
+
+/*.item-pagination-link {
+    display: none;
+}*/
+
+h2.item-pagination-title {
+  font-size: 1.2em;
+}
+
+/* ------------------------------------------------ */
+/* CCLA  Service Lists                              */
+/* ------------------------------------------------ */
+
+p.backLink {
+  margin-top: 0;
+}
+p.backLink a:visited,
+p.backLink a:link{
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+ 
+div#services .serviceList ul a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+div#services .serviceList ul a:visited {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+div#services .serviceList {
+  width: 100%;
+}
+div#services .serviceList .theTitle {
+  font-weight: bold;
+}
+
+div#services .serviceList ul {
+  list-style-type: circle;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+#selectblock {
+  width: 98%;
+  text-align: center;
+}
+#servicePage {
+  padding-top: 0px; 
+  margin: 0 auto;
+  width: 100%;
+  font-size: 21px;
+}
+
+#serviceVideo {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 0;
+}
+
+#serviceVideo h4{
+    text-align: center;
+}
+
+#serviceInfo {
+    margin-top: 10px;
+}
+#serviceVideo #serviceInfo span.serviceTitle,
+#serviceVideo #serviceInfo span.serviceBegins {
+    font-style: italic;
+}
+
+div.theDate::before {
+  content: '\00a0- ';
+}
+
+div.theTitle {
+  display: inline-block;
+  font-weight: bolder;
+}
+
+div.theDate {
+  display: inline-block;
+  font-style: italic;
+}
+
+div.theDate::before {
+  content: "\00a0 - ";
+
+}
+
+div.thePreacher,
+div.theDate {
+  font-size: 18px;
+  font-style: italic;
+}
+
+div.theBegins {
+    display: block;
+}
+
+form label {
+  font-size: 18px; 
+}
+
+
+
+label {
+  order: 1;
+  width: 7em;
+  text-align: left;
+  padding-right: 0.5em;
+    white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+}
+
+form#selectOptions {
+  max-width: 800px;
+}
+
+form#selectOptions select {
+  /*max-width: 150px;*/
+}
+
+form#selectOptions input {
+  font-size: 18px;
+  display: block;
+  margin-top: 5px;
+}
+
+/*#serviceVideo h4 a {
+  text-decoration: underline;
+}*/
+
+@media only screen and (max-width: 667px) {
+  form#selectOptions select {
+      max-width: 150px;
+  }
+}

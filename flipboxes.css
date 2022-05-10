@@ -1,0 +1,325 @@
+/* ----------------------------------------------------------- */
+/* Flipbox                                                     */
+/*    04/10/2021 - initial                                     */
+/*    Updated 03/02/2022                                       */
+/* ----------------------------------------------------------- */
+
+div.flipBoxContainer {
+    width: 100%;
+    margin: 0 auto;
+}
+
+div.flipBoxContainer div.flex-container {
+    display: flex;
+    flex-direction: row;
+    font-size: 1em;
+    text-align: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* row-gap: 20px; */
+    gap: 10px;
+}
+
+div.flipBoxContainer.layout2 div.flex-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 1em;
+  text-align: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  /*row-gap: 20px;*/
+  gap:  10px;
+}
+
+
+div.flipBoxContainer div.flex-container div.newColumn:only-child {
+  margin: 0 auto;
+}
+
+/* percentage */
+div.flipBoxContainer div.flex-container div.newColumn {
+    width: 32%;
+    height: unset;
+    /*padding-top clamp is (min, preferred, max) */
+    padding-top: clamp(200px,32%,300px);
+    max-width: unset;
+    position: relative;
+}
+
+div.flipBoxContainer.layout2 div.flex-container div.newColumn {
+  width: 400px;
+  height: unset;
+  padding-top: 300px;
+  max-width: unset;
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 0;
+}
+
+div.flipBoxContainer div.flex-container div.newColumn .flip-card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+}
+/* end percent */
+
+div.flipBoxContainer div.flex-container .flip-card {
+    background-color: transparent;
+    border: 1px solid #f1f1f1;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+div.flipBoxContainer div.flex-container .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+div.flipBoxContainer .flip-card-front,
+div.flipBoxContainer .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 0;
+}
+
+div.flipBoxContainer .flip-card-front {
+    background-color: #bbb;
+    color: black;
+}
+
+div.flipBoxContainer div.front.face img {
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+}
+
+div.flipBoxContainer div.front.face img {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+div.flipBoxContainer div.front.face img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 1s;
+    top: 0;
+    left: 0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+}
+
+div.flipBoxContainer div.flip-card-front img.active {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=1);
+}
+
+div.flipBoxContainer .flip-card-front,
+div.flipBoxContainer .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 0;
+}
+
+#page div.flipBoxContainer .flip-card-back a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: inherit;
+    text-decoration: none;
+}
+
+div.flipBoxContainer .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+div.flipBoxContainer .flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+div.flipBoxContainer .flip-card-back {
+    background-color: rgb(0, 85, 120);
+    color: white;
+    /*background: linear-gradient(to right,#50bebe 0,#099 50%,#0099b0 83%,#0099cb 100%);*/
+}
+
+div.flipBoxContainer .labelText {
+    color: white;
+    font-style: italic;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+div.flipBoxContainer .flip-card-front .labelText {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    white-space: pre-wrap;
+    background-color: rgb(238, 238, 238);
+    opacity: ;
+    background-color: rgba(256,256,256,.5);
+    border-radius: 10px;
+    padding: 0 10px;
+    color: black;
+}
+
+div.flipBoxContainer .flip-card-back div.centerBack  .labelText {
+    color: black;
+}
+
+div.flipBoxContainer .centerBack {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+div.flipBoxContainer .centerBack div.topBox {
+  flex-basis: 15%;
+  position: relative;
+  background:  wheat;
+}
+
+div.flipBoxContainer .centerBack div.backContent {
+  flex-basis: 70%;
+  position: relative;
+}
+
+div.flipBoxContainer .centerBack div.backLink {
+  flex-basis: 15%;
+  position: relative;
+}
+
+div.flipBoxContainer .centerBack .labelText {
+    position: relative;
+    color: inherit;
+}
+
+div.flipBoxContainer div.centerBack .labelText {
+   /* left: unset;
+    top: unset;
+    transform: unset;*/
+}
+/*
+div.flipBoxContainer div.centerBack .labelText {
+    display: inline-block;
+    color: black;
+    display: inline-block;
+    color: black;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+*/
+
+div.flipBoxContainer .centerBack div.backContent div {
+    padding: 0 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-clamp: 3;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    font-style: italic;
+}
+
+div.flipBoxContainer .centerBack div.backContent p {
+  margin: 0
+  padding: 10px 0;
+}
+
+/*
+div.flipBoxContainer .centerBack div.backLink span{
+    position: absolute;
+    text-align: center;
+    left: 0;
+    right: 0;
+    text-decoration: underline;
+    font-style: italic;
+    font-size: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+*/
+
+div.flipBoxContainer .centerBack div.backLink span {
+  text-decoration: underline;
+}
+
+div.flipBoxContainer.layout2 div.flex-container div.newColumn .flip-card {
+    border-radius: 10px;
+    border: 3px solid #337aa6;
+}
+
+div.flipBoxContainer.layout2 .centerBack div.topBox {
+  background: #b0cdd9;
+}
+
+div.flipBoxContainer.layout2 .flip-card-back {
+  background-color: #2168A6;
+}
+
+div.flipBoxContainer.layout2 .centerBack div.backLink span {
+  text-decoration: none;
+  background: #b0cdd9;
+  padding: 0 10px;
+  border-radius: 5px;
+  color: black;
+}
+
+@media (max-width: 800px) {
+    div.flipBoxContainer div.flex-container div.newColumn {
+        width: calc(50% - 5px);
+        padding-top: clamp(200px,calc(50% - 5px),300px);
+    }
+    div.flipBoxContainer div.flex-container {
+      justify-content: center;
+    }
+}
+
+@media (max-width: 640px) {
+    div.flipBoxContainer div.flex-container div.newColumn {
+        width: calc(100% - 17px);
+        padding-top: calc(100% - 17px);
+    }
+}

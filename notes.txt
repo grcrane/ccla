@@ -1,0 +1,91 @@
+12/02/20
+
+jQuery
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+Raw
+https://raw.githubusercontent.com/grcrane/sq-ccla/main/code.js
+https://raw.githubusercontent.com/grcrane/sq-ccla/main/service_list.js
+https://raw.githubusercontent.com/grcrane/sq-ccla/main/style.css
+
+cdn
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/grcrane/sq-ccla@main/code.js"></script>
+
+-- Combined
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/grcrane/sq-ccla@c2b168b/code.min.js"></script>
+<link rel='stylesheet' href="https://cdn.jsdelivr.net/gh/grcrane/sq-ccla@66455de/style.min.css" />
+
+-- Genmailchimp
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/grcrane/sq-ccla@614a476/genmailchimp.js"></script>
+
+Service List page code
+
+<script>                                     
+jQuery(document).ready(function() {                                                        
+   getServiceFromGoogle();
+})
+</script>
+
+<div id=servicePage action="">
+  <form id="selectOptions">
+    <fieldset>
+    <legend>Search</legend>
+    <div>
+    <label for="year">Service Year:</label>
+    <select id=year name="year" onchange="this.form.submit()"></select>
+  </div>
+  <div>
+    <label for="sermonby">Sermon By:</label>
+    <select id=sermonby name="sermonby" onchange="this.form.submit()"></select>
+  </div>
+    <input type=button onclick="javascript: window.location.assign(window.location.pathname);" value="Clear Search">
+  </fieldset>
+  </form>
+  <p>
+  <div id="services">
+  </div>
+</div>
+
+---- Test for older versions of IE  12/22/20
+
+<script>
+$( document ).ready(function() {
+  var ua = window.navigator.userAgent;
+    var msie = ua.indexOf('MSIE '); // IE 10 and older
+  
+    var trident = ua.indexOf('Trident/'); // IE 11
+  if (msie == -1 && trident == -1) { 
+    doGalleryShow();
+  }
+  else {
+    var gallery = $('#page  article:first-child section.gallery-section').first().find('figure');
+    gallery.closest('section').css('display', 'none'); 
+  } 
+})
+</script>
+
+----- Generate MailChimp html page body code
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/grcrane/sq-ccla@614a476/genmailchimp.js"></script>
+<div id=controls-wrapper>
+    <h3 class="statusMessage">Click the start button to harvest information.</h3>
+    <button id="startGather" onclick="do_get_mailchimp()">Start</button>
+    <button id="copyToClip" onclick="copyToClipboard('div#MailChimp-wrapper')">Copy to clipboard</button>
+    <textarea placeholder="insert html" ></textarea>
+</div>
+<div id="MailChimp-wrapper">
+</div>
+
+</body>
+
+
+----- New Generate 4/27/22
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/grcrane/sq-ccla@8bbaf23/genmailchimp.js"></script>
+<script>
+$(document).ready(function() {
+  theControl('#mailChimpWrapper');
+})
+</script>
+<div id="mailChimpWrapper"></div>
+  

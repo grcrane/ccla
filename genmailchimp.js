@@ -5,7 +5,7 @@
 var thestyles = '<style>' + 
 'h2.sectionType{text-align: left;font-weight: normal;color: #0000CD;font-size: 32px;margin: 24px 0 24px 0}' + 
 'img.theimg{width: 150px;height: auto;object-fit: cover;float: left;margin: 5px 10px 5px 5px}' +
-'div.contentData:not(:first-child){margin-top: 24px}' + 
+'div.contentData:not(:first-child){margin-top: 16px}' +
 'div.contentData{content: "";clear: both;display: table;}' + 
 'p.contentData{margin: 0;padding: 0}div.title{font-weight: bold;font-size: 16px;color: #4B0082}' + 
 '.datetime{font-style: italic;font-size: .9em}' + 
@@ -235,8 +235,8 @@ function formatAMPM(thedate) {
 
     const months = ["January","February","March","April","May","June",
     "July","August","September","October","November","December"];
-    const days = ["Monday","Tuesday","Wednesday","Thursday",
-    "Friday","Saturday","Sunday"];
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday",
+    "Friday","Saturday"];
 
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -244,7 +244,7 @@ function formatAMPM(thedate) {
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = days[date.getDay()-1] + ", " + months[date.getMonth()+1]
+    var strTime = days[date.getDay()] + ", " + months[date.getMonth()+1]
         + " " + date.getDate() + ", " + date.getFullYear() + " " + hours + ':' + minutes + ' ' + ampm;
     return strTime;
 }
@@ -405,6 +405,7 @@ function theMailchimpCallback(selectorID,json, attr) {
   $(selectorID).before(addit);
   $(selectorID).css('border','1px solid black').css('padding','10px');
   $.each(json["items"], function(index, value) {
+
       // get the data for this blog entry
       theimg = "";
       img = value["assetUrl"];
@@ -427,9 +428,6 @@ function theMailchimpCallback(selectorID,json, attr) {
       }
       img = (img) ? `<img class="theimg" src="${img}">` : '';
 
-      console.log('parts');
-      console.log(parts);
-      console.log('prevsection=' + prevsection);
       // if this is a new section then put out section header
       if (prevsection != parts[1]) {
         prevsection = parts[1];
@@ -451,7 +449,6 @@ function theMailchimpCallback(selectorID,json, attr) {
         }
         starting += "</div>";
       }
-
       // Now add the blog info
       out += `<div class="contentData">
           <div class="title">${title}</div>

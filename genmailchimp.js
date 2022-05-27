@@ -244,7 +244,7 @@ function formatAMPM(thedate) {
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = days[date.getDay()] + ", " + months[date.getMonth()+1]
+    var strTime = days[date.getDay()] + ", " + months[date.getMonth()]
         + " " + date.getDate() + ", " + date.getFullYear() + " " + hours + ':' + minutes + ' ' + ampm;
     return strTime;
 }
@@ -267,12 +267,12 @@ function recursiveAjaxCall2(
   callback,
   items=[],
   attr, theCount=0) {
-  console.log('entry recursiveAjaxCall2=' + selectorID);
+  //console.log('entry recursiveAjaxCall2=' + selectorID);
   var upcoming = true;
   var past = false;
   upcoming = ("upcoming" in attr) ? attr["upcoming"] : upcoming;
   past = ("past" in attr) ? attr["past"] : past;
-  console.log('url=' + theCollections[theCount]);
+  //console.log('url=' + theCollections[theCount]);
 
     $.ajax({
       url: theCollections[theCount],
@@ -282,7 +282,7 @@ function recursiveAjaxCall2(
     })
     .done(function (data) {
       var j = data;
-      console.log(data);
+      //console.log(data);
         if ("upcoming" in data || "past" in data) {
           if ("upcoming" in data && upcoming === true) {
             items = items.concat(data['upcoming']);
@@ -315,8 +315,8 @@ function recursiveAjaxCall2(
               for (i = 0; i < theCollections.length; i++) {
                 dataArray.push([]);
               }
-              console.log('theCount=' + theCount);
-              console.log(items);
+              //console.log('theCount=' + theCount);
+              //console.log(items);
               for (i = 0; i < items.length; i++) {
                 if (typeof items[i] != "undefined") {
                   var temp = items[i]["fullUrl"].split("/");
@@ -336,7 +336,7 @@ function recursiveAjaxCall2(
         }
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
-      console.log(jqXHR);
+      //console.log(jqXHR);
       var status = jqXHR["status"];
       var msg = "Error encountered, status=\"" +
         status + "\" errorTrhown=\"" + errorThrown + "\"";
@@ -345,7 +345,7 @@ function recursiveAjaxCall2(
           theCollections[theCount] + "\"";
       }
       msg = "<div class=\"errorMsg\">Error: " + msg + "</div>";
-      console.log("Error from recursiveAjaxCall2: " + msg);
+      //console.log("Error from recursiveAjaxCall2: " + msg);
     });
 }
 
@@ -363,7 +363,7 @@ function theControl(selectorID) {
     "announcement-items",
     "sermon-information",
     "vestry-connections"],
-    offset, selectorID, theMailchimpCallback, items, attr);
+    offset, selectorID, theMailchimpCallback, items, attr, true);
 }
 
 function theMailchimpCallback(selectorID,json, attr) {

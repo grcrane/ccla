@@ -450,13 +450,12 @@ function theMailchimpCallback(selectorID,json, attr) {
         starting += "</div>";
       }
       // Now add the blog info
-      out += `<div class="contentData">
+      out += `<div class="contentData" style="clear:both;">
           <div class="title">${title}</div>
           ${starting}
           ${img}
           <p style="white-space:normal;">${content}</p>
-        </div>
-        <div style="clear:both;"></div>`;
+        </div>`;
     })
     $(selectorID).append(out);
     $('div.contentData').each(function(index, v) {

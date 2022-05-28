@@ -170,11 +170,10 @@ function theflexBoxesCallback(selectorID, json, attr) {
 }
 
 function formatflexBoxesDisplay(selectorID,json, attr) {
-  attr = toLowerKeys(attr); // make sure the keys re lowercase
+
   var a = json['items'];
   var testout = '';
   var findCats = ('findcats' in attr) ? attr['findcats'] : '';
-  var flipSpeed = ('flipspeed' in attr) ? parseFloat(attr['flipspeed']) : '';
   var categories = [];
   var myflag = false;
 
@@ -227,12 +226,6 @@ function formatflexBoxesDisplay(selectorID,json, attr) {
       excerpt = excerpt.replace(/(<([^>]+)>)/gi, "");
       process_card_info(selectorID, source, images, title, title, excerpt);
     }
-  }
-
-  // see if a specific flip speed is requested.  Default is 2s
-  if (flipSpeed != "") {
-    $(selectorID + " div.flipBoxContainer div.flex-container .flip-card-inner")
-      .css('transition', 'transform ' + flipSpeed + 's');
   }
 
   $('div.front.face img:first-child')

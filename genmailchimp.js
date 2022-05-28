@@ -262,91 +262,103 @@ function cleanup2(beautify) {
 }
 
 function recursiveAjaxCall2(
-  theCollections, offset = "",
+  theCollections,
+  offset = "",
   selectorID,
   callback,
   items=[],
-  attr, theCount=0) {
-  console.log('entry recursiveAjaxCall2=' + selectorID);
-  var upcoming = true;
-  var past = false;
-  upcoming = ("upcoming" in attr) ? attr["upcoming"] : upcoming;
-  past = ("past" in attr) ? attr["past"] : past;
-  console.log('url=' + theCollections[theCount]);
+  attr,
+  nocache = false,
+  theCount=0 ) {
 
-    $.ajax({
-      url: theCollections[theCount],
-      data: {offset: offset,
-      format: "json"},
-      async:   true
-    })
-    .done(function (data) {
-      var j = data;
-      //console.log(data);
-        if ("upcoming" in data || "past" in data) {
-          if ("upcoming" in data && upcoming === true) {
-            items = items.concat(data['upcoming']);
-          }
-          if ("past" in data && past === true) {
-            items = items.concat(data['past']);
-          }
+  var upcoming = true;
+  var past     = false;
+  upcoming     = ("upcoming" in attr) ? attr["upcoming"] : upcoming;
+  past         = ("past" in attr) ? attr["past"] : past;
+
+  var marktime = '';
+  if (nocache === true) {marktime = new Date().getTime().toString();}
+  var collectionInfo = [];
+
+  $.ajax({
+    url: theCollections[theCount],
+    data: {offset: offset,
+    format: "json",
+    t: marktime},
+    async:   true
+  })
+  .done(function (data) {
+    var j = data;
+      if ("upcoming" in data || "past" in data) {
+        if ("upcoming" in data && upcoming === true) {
+          items = items.concat(data['upcoming']);
+        }
+        if ("past" in data && past === true) {
+          items = items.concat(data['past']);
+        }
+      }
+      else {
+        if ("item" in data) {
+          items = items.concat(data["item"]);
         }
         else {
-          if ("item" in data) {
-            items = items.concat(data["item"]);
+          items = items.concat(data["items"]);
+        }
+      }
+      if ("pagination" in j && "nextPageOffset" in j["pagination"]) {
+        var off = j["pagination"]["nextPageOffset"];
+        recursiveAjaxCall2(theCollections, off, selectorID,
+          callback, items, attr, nocache,theCount);
+      }
+      else {
+        collectionInfo = ('collectionInfo' in attr) ?
+          attr['collectionInfo'] : [];
+        title = data["collection"]["title"];
+        urlId = data["collection"]["urlId"];
+        type = data["collection"]["type"];
+        collectionInfo.push({title: title, urlId: urlId, type: type});
+        attr['collectionInfo'] = collectionInfo;
+          theCount = theCount + 1;
+          if (theCollections.length > theCount) {
+            recursiveAjaxCall2(theCollections, off, selectorID,
+              callback, items, attr, nocache, theCount);
           }
           else {
-            items = items.concat(data["items"]);
-          }
-        }
-        if ("pagination" in j && "nextPageOffset" in j["pagination"]) {
-          var off = j["pagination"]["nextPageOffset"];
-          recursiveAjaxCall2(theCollections, off, selectorID,
-            callback, items, attr,theCount);
-        }
-        else {
-            theCount = theCount + 1;
-            if (theCollections.length > theCount) {
-              recursiveAjaxCall2(theCollections, off, selectorID,
-                callback, items, attr, theCount);
+            var dataArray = [];
+            for (i = 0; i < theCollections.length; i++) {
+              dataArray.push([]);
             }
-            else {
-              var dataArray = [];
-              for (i = 0; i < theCollections.length; i++) {
-                dataArray.push([]);
-              }
-              console.log('theCount=' + theCount);
-              console.log(items);
-              for (i = 0; i < items.length; i++) {
-                if (typeof items[i] != "undefined") {
-                  var temp = items[i]["fullUrl"].split("/");
+            for (i = 0; i < items.length; i++) {
+              if (typeof items[i] != "undefined") {
+                var temp = items[i]["fullUrl"].split("/");
 
-                  var x = theCollections.indexOf(temp[1]);
-                  if (x != -1) {
-                    dataArray[x].push(items[i]);
-                  }
-                }
-                else {
-                  items.splice(i,1);
-                  i = i - 1;
+                var x = theCollections.indexOf(temp[1]);
+                if (x != -1) {
+                  dataArray[x].push(items[i]);
                 }
               }
-              callback(selectorID, {items: items, dataArray: dataArray}, attr);
+              else {
+                items.splice(i,1);
+                i = i - 1;
+              }
             }
-        }
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      console.log(jqXHR);
-      var status = jqXHR["status"];
-      var msg = "Error encountered, status=\"" +
-        status + "\" errorTrhown=\"" + errorThrown + "\"";
-      if (status == "404") {
-        msg = "Could not find collection \"" +
-          theCollections[theCount] + "\"";
+            callback(selectorID, {items: items, dataArray: dataArray}, attr);
+          }
       }
-      msg = "<div class=\"errorMsg\">Error: " + msg + "</div>";
-      console.log("Error from recursiveAjaxCall2: " + msg);
-    });
+  })
+  .fail(function (jqXHR, textStatus, errorThrown) {
+    console.log(jqXHR);
+    var status = jqXHR["status"];
+    var msg = "Error encountered, status=\"" +
+      status + "\" errorTrhown=\"" + errorThrown + "\"";
+    if (status == "404") {
+      msg = "Could not find collection \"" +
+        theCollections[theCount] + "\"";
+    }
+    msg = "<div class=\"errorMsg\">Error: " + msg + "</div>";
+    console.log("Error from recursiveAjaxCall2: " + msg);
+    $(selectorID).html(msg);
+  });
 }
 
 /* Main entry point called from code on page,
@@ -363,10 +375,10 @@ function theControl(selectorID) {
     "announcement-items",
     "sermon-information",
     "vestry-connections"],
-    offset, selectorID, theMailchimpCallback, items, attr);
+    offset, selectorID, theMailchimpCallback2, items, attr, true);
 }
 
-function theMailchimpCallback(selectorID,json, attr) {
+function theMailchimpCallback2(selectorID,json, attr) {
   var prevsection = "";
   var allowedExtensions =  /(\.jpg|\.jpeg|\.png|\.gif)$/i;
   var i = 0;
@@ -457,6 +469,7 @@ function theMailchimpCallback(selectorID,json, attr) {
           <p style="white-space:normal;">${content}</p>
         </div>`;
     })
+    out += `<div style="clear:both;"></div>`;
     $(selectorID).append(out);
     $('div.contentData').each(function(index, v) {
       var temp = $(v).find('p:first').text().trim();

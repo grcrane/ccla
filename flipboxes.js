@@ -235,6 +235,7 @@ function formatflexBoxesDisplay(selectorID,json, attr) {
   $( window ).resize(function() {
     flipCardResize(selectorID);
   });
+}
 
 var columnIndex = 1;
 

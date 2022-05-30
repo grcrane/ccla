@@ -41,9 +41,8 @@ function recursiveAjaxCall2(
   past         = ("past" in attr) ? attr["past"] : past;
 
   var marktime = '';
-  console.log('nocache=' + nocache);
   if (nocache === true) {marktime = new Date().getTime().toString();}
-  console.log('marktime=' + marktime);
+  var collectionInfo = [];
 
   $.ajax({
     url: theCollections[theCount],
@@ -76,31 +75,20 @@ function recursiveAjaxCall2(
           callback, items, attr, nocache,theCount);
       }
       else {
+        collectionInfo = ('collectionInfo' in attr) ?
+          attr['collectionInfo'] : [];
+        title = data["collection"]["title"];
+        urlId = data["collection"]["urlId"];
+        type = data["collection"]["type"];
+        collectionInfo.push({title: title, urlId: urlId, type: type});
+        attr['collectionInfo'] = collectionInfo;
           theCount = theCount + 1;
           if (theCollections.length > theCount) {
             recursiveAjaxCall2(theCollections, off, selectorID,
               callback, items, attr, nocache, theCount);
           }
           else {
-            var dataArray = [];
-            for (i = 0; i < theCollections.length; i++) {
-              dataArray.push([]);
-            }
-            for (i = 0; i < items.length; i++) {
-              if (typeof items[i] != "undefined") {
-                var temp = items[i]["fullUrl"].split("/");
-
-                var x = theCollections.indexOf(temp[1]);
-                if (x != -1) {
-                  dataArray[x].push(items[i]);
-                }
-              }
-              else {
-                items.splice(i,1);
-                i = i - 1;
-              }
-            }
-            callback(selectorID, {items: items, dataArray: dataArray}, attr);
+            callback(selectorID, {items: items}, attr);
           }
       }
   })
@@ -165,15 +153,17 @@ function collectionControl(
 
 // Callback for Flex Boxes
 function theflexBoxesCallback(selectorID, json, attr) {
-  var data = {items: json['dataArray'][0]};
+  //var data = {items: json['dataArray'][0]};
+  var data = {items: json['items']};
   formatflexBoxesDisplay(selectorID,data, attr);
 }
 
 function formatflexBoxesDisplay(selectorID,json, attr) {
-
+  attr = toLowerKeys(attr); // make sure the keys re lowercase
   var a = json['items'];
   var testout = '';
   var findCats = ('findcats' in attr) ? attr['findcats'] : '';
+  var flipSpeed = ('flipspeed' in attr) ? parseFloat(attr['flipspeed']) : '';
   var categories = [];
   var myflag = false;
 
@@ -228,6 +218,12 @@ function formatflexBoxesDisplay(selectorID,json, attr) {
     }
   }
 
+  // see if a specific flip speed is requested.  Default is 2s
+  if (flipSpeed != "") {
+    $(selectorID + " div.flipBoxContainer div.flex-container .flip-card-inner")
+      .css('transition', 'transform ' + flipSpeed + 's');
+  }
+
   $('div.front.face img:first-child')
       .addClass("active");
       $('')
@@ -239,7 +235,6 @@ function formatflexBoxesDisplay(selectorID,json, attr) {
   $( window ).resize(function() {
     flipCardResize(selectorID);
   });
-}
 
 var columnIndex = 1;
 

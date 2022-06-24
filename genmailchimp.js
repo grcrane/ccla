@@ -205,7 +205,8 @@ img.theimg{
   object-fit: cover;
   float: left;
   margin: 5px 10px 5px 0;
-  padding: 0;}
+  padding: 0;
+  min-height: 100px;}
 div.contentData:not(:first-child){margin-top: 24px}
 div.contentData{content: "";clear: both;}
 p.contentData{margin: 0;padding: 0}div.title{font-weight: bold;font-size: 16px;color: #4B0082}

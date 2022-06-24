@@ -449,7 +449,8 @@ function theMailchimpCallback2(selectorID,json, attr) {
             sectionName = value[1];
           }
         })
-        out += `<h2 class="sectionType">${sectionName}</h2>`;
+        out += `<div style="clear:both;"></div>\n
+        <h2 class="sectionType">${sectionName}</h2>`;
       }
 
       starting = '';

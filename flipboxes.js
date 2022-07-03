@@ -239,7 +239,7 @@ function formatflexBoxesDisplay(selectorID,json, attr) {
 
 var columnIndex = 1;
 
-function flip_carousel(selectorID) {
+function flip_carousel(selectorID, columnIndex=1) {
   var i;
   var numColumns = $(selectorID + ' .newColumn').length;
   if (columnIndex > numColumns) { columnIndex = 1;}
@@ -254,7 +254,7 @@ function flip_carousel(selectorID) {
   x.removeClass("active");
   background.find('img').eq(myIndex).addClass("active");
   myIndex++;
-  setTimeout(function() {flip_carousel(selectorID)}, 5000);
+  setTimeout(function() {flip_carousel(selectorID,columnIndex)}, 5000);
 }
 
 function process_card_info(selectorID, link,images, caption, label, message) {

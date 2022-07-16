@@ -461,3 +461,26 @@ function getLastVideo() {
     return id;
 
 }
+
+/* ------------------------------------------------------------------- */
+/* Sub menu bar                                                        */
+/* Added 07/16/22 GRC                                                  */
+/* ------------------------------------------------------------------- */
+
+function addWindowsSubMenuBar(selectorID) {
+  var temp = `<div class="subMenuBar">
+    <nav>
+       <a href="/stained-glass-windows">Windows Home</a>
+       <a href="/birth-of-an-idea"dea>Birth of an Idea</a>
+       <a href="/selecting-the-artist">The Artist</a>
+    </nav>
+    <nav>
+      <a href="/windows-fundraising">Fundraising</a>
+      <a href="/windows-installation">Installation</a>
+      <a href="/windows-celebration">Celebrations</a>
+    </nav>
+  </div>`;
+  $('#' + selectorID).html(temp);
+  var path = window.location;
+  $('#' + selectorID).find('a[href$="' + path.pathname + '"]').addClass("active");
+}

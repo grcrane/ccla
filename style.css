@@ -385,3 +385,90 @@ form#selectOptions input {
       max-width: 150px;
   }
 }
+
+/*-------------------------------------------------------------*/
+/* sub Menu Bar                                                */
+/*    07/17/2022 - initial                                     */
+/*-------------------------------------------------------------*/
+
+#page .subMenuBar nav a {
+  background: rgb(77, 54, 59);
+  color: white;
+}
+
+#page .subMenuBar nav a.active {
+  background: rgb(131, 124,124);
+  color: white;
+}
+  
+.subMenuBar nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.subMenuBar nav a{
+  flex: 1;
+  text-align: center;
+  /*margin: 0.25em;*/
+  padding: 0.25em;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  border-radius: 5px;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.subMenuBar {
+  width: 70%;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.subMenuBar nav a.headerName {
+  background: #eee;
+  font-weight: bold;
+  flex-grow: 3;
+  cursor: pointer;
+  pointer-events: none;
+  display: none;
+}
+
+div.learnMenuButton {
+    display: block;
+    text-align: center;
+    font-weight: 400;
+}
+
+div.learnMenuButton .toggle a {
+  color:  black;
+}
+
+@media only screen and (min-width: 768px) {
+    .subMenuBar nav { 
+        flex-direction: row; 
+    }
+    #page div.learnMenuButton {
+      display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .subMenuBar.collapsable {
+        display: none;
+    }
+    .subMenuBar.open {
+        display: block;
+    }
+    #subMenu {
+        display: none;
+    }
+    #subMenu.open {
+        display: block;
+    }  
+    div.learnMenuButton .toggle a {
+      color: rgb(0, 0, 255);
+    }
+}

@@ -475,7 +475,7 @@ function addWindowsSubMenuBar(selectorID) {
        <a href="/selecting-the-artist">The Artist</a>
     </nav>
     <nav>
-      <a href="/delle-de-verre">Delle De Verre Tehnique</a>
+      <a href="/dalle-de-verre">Dalle De Verre Tehnique</a>
       <a href="/windows-installation">Installation</a>
     </nav>
   </div>`;

@@ -266,7 +266,7 @@ function getServiceFromGoogle() {
     var options = "<option value='ALL' " + selected + ">All</option>";
     xyears.forEach(function(item, key) {
         var selected = '';
-        if (item.c[0].v == selectYear) {
+        if (item.c[0] != null && item.c[0].v == selectYear) {
             selected = ' selected ';
         }
         options += "<option value = '" + item.c[0].v + "'" + selected + ">" + item.c[0].v + "</option>";

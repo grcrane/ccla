@@ -14,6 +14,7 @@ var thestyles = '<style>' +
 'div.contentData > p:first-of-type{margin-top: 0 !important}' +
 '</style>';
 
+
 function formatFactory(html) {
     function parse(html, tab = 0) {
         var tab;

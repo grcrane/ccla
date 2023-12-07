@@ -259,7 +259,7 @@ function getServiceFromGoogle() {
         xyears = yearlist.table.rows;
     }
     $('#selectOptions select#year').html('');
-    console.log(xyears);
+    //console.log(xyears);
     if (!selectYear && xyears != null) {selectYear = xyears[0].c[0].v;}
     var selected = '';
     if (selectYear == 'ALL') {selected = ' selected ';}
@@ -374,7 +374,15 @@ function getServiceFromGoogle() {
         }
         if (item.c[videoCol] != null) {
             var url = item.c[videoCol].v;
-            str = str + '<li class="serviceItem"><a target="blank" href=' + url + '>Watch the service' + notes + '</a></li>';
+            var d1 = item.c[dateCol].f;
+            var d2 = 'November 13, 2023';
+            let date1 = new Date(d1).getTime();
+            let date2 = new Date(d2).getTime();
+            text = 'Watch the sermon';
+            if (date1 < date2) {
+                text = 'Watch the service';
+            }
+            str = str + '<li class="serviceItem"><a target="blank" href=' + url + '>' + text + notes + '</a></li>';
         }
         str = str + '</ul>';
         $('#services').append(str);

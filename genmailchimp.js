@@ -252,6 +252,10 @@ function formatAMPM(thedate) {
 }
 
 function cleanup2(beautify) {
+    if (typeof beautify !== 'string') {
+      console.error('Invalid input: beautify should be a string');
+      return '';
+    }
     beautify = beautify.replace(/\<p style=\"white-space:normal;\"\>\<\/p\>/gi,'');
     beautify = beautify.replace(/\<p\>\<\/p\>/gi,'');
     beautify = beautify.replace(/white-space:pre-wrap;/gi,'white-space:normal;');

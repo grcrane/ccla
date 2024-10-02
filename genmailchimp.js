@@ -403,7 +403,8 @@ function theMailchimpCallback2(selectorID,json, attr) {
     ["events-list","Upcoming Events","events"],
     ["announcement-items","Announcements","blog"],
     ["sermon-information","Past Services","blog"],
-    ["vestry-connections","Vestry Connections","blog"]
+    ["vestry-connections","Vestry Connections","blog",
+    ["campus-use-calendar","Campus Use Calendar","blog"]]
   ]
 
   var out = '';

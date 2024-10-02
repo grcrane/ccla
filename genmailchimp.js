@@ -380,7 +380,8 @@ function theControl(selectorID) {
     ["events-list",
     "announcement-items",
     "sermon-information",
-    "vestry-connections"],
+    "vestry-connections",
+    "campus-use-calendar"],
     offset, selectorID, theMailchimpCallback2, items, attr, true);
 }
 
